@@ -1,20 +1,34 @@
 import React, { Component} from 'react';
+import { connect } from 'react-redux';
 
-export default class BookList extends Component {
+class BookList extends Component {
 
     renderList() {
+        // console.log('renderList props', this.props)
         return this.props.books.map((book) => {
-            <li key = {book.title} className="list-group-item">
-                {book.title}
-            </li>
+            return (
+                <li key={book.title} className="list-group-item">
+                    {book.title}
+                    {/* {console.log(book.title)} */}
+                </li>
+            )
         })
     }
 
     render() {
         return (
-            <ul className="list-group col-sn-4">
+            <ul className="list-group col-sm-4">
+                {/* {console.log("this.renderList", this.renderList())} */}
                 {this.renderList()}
             </ul>
         )
     }
 };
+
+function mapStateToProps (state) {
+    return {
+        books: state.books
+    }
+}
+
+export default connect(mapStateToProps)(BookList);
